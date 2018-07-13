@@ -41,6 +41,7 @@ class ZohoHTTPConnector {
         curl_setopt($curl_pointer, CURLOPT_USERAGENT, $this->userAgent);
         curl_setopt($curl_pointer, CURLOPT_HTTPHEADER, self::getRequestHeadersAsArray());
         curl_setopt($curl_pointer, CURLOPT_CUSTOMREQUEST, APIConstants::REQUEST_METHOD_GET);
+        curl_setopt($curl_pointer, CURLOPT_CONNECTTIMEOUT, 15);
 
         if ($this->requestType === APIConstants::REQUEST_METHOD_POST) {
             curl_setopt($curl_pointer, CURLOPT_CUSTOMREQUEST, APIConstants::REQUEST_METHOD_POST);
@@ -54,6 +55,12 @@ class ZohoHTTPConnector {
         }
         $result = curl_exec($curl_pointer);
         $responseInfo = curl_getinfo($curl_pointer);
+        if ($result === FALSE && ($curl_errno = curl_errno($curl_pointer))) {
+            $exception = new ZCRMException(curl_error($curl_pointer), $curl_errno);
+            $exception->setExceptionCode('curl_error');
+            curl_close($curl_pointer);
+            throw $exception;
+        }
         curl_close($curl_pointer);
 
         return array($result, $responseInfo);
@@ -66,9 +73,16 @@ class ZohoHTTPConnector {
         curl_setopt($curl_pointer, CURLOPT_HEADER, 1);
         curl_setopt($curl_pointer, CURLOPT_USERAGENT, $this->userAgent);
         curl_setopt($curl_pointer, CURLOPT_HTTPHEADER, self::getRequestHeadersAsArray());
+        curl_setopt($curl_pointer, CURLOPT_CONNECTTIMEOUT, 15);
         //curl_setopt($curl_pointer,CURLOPT_SSLVERSION,3);
         $result = curl_exec($curl_pointer);
         $responseInfo = curl_getinfo($curl_pointer);
+        if ($result === FALSE && ($curl_errno = curl_errno($curl_pointer))) {
+            $exception = new ZCRMException(curl_error($curl_pointer), $curl_errno);
+            $exception->setExceptionCode('curl_error');
+            curl_close($curl_pointer);
+            throw $exception;
+        }
         curl_close($curl_pointer);
         return array($result, $responseInfo);
     }
@@ -191,3 +205,5 @@ class ZohoHTTPConnector {
 }
 
 ?>
+
+
