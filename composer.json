@@ -1,7 +1,7 @@
 {
-    "name": "dylanlawrence/zohocrm",
+    "name": "adrp/zcrm-php-sdk",
     "description": "Zoho CRM API SDK for PHP",
-    "type": "SDK",
+    "type": "library",
     "homepage": "https://github.com/zoho/zcrm-php-sdk",
     "authors": [
         {
