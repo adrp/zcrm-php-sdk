@@ -8,9 +8,12 @@ use ZCRM\users\ZCRMUserTheme;
 use ZCRM\users\ZCRMRole;
 use ZCRM\users\ZCRMProfile;
 use ZCRM\exception\ZCRMException;
+use ZCRM\exception\APIExceptionHandler;
 use ZCRM\crud\ZCRMPermission;
 use ZCRM\crud\ZCRMProfileSection;
 use ZCRM\crud\ZCRMProfileCategory;
+use ZCRM\common\APIConstants;
+use ZCRM\api\APIRequest;
 
 /**
  *

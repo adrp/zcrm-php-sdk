@@ -30,5 +30,3 @@ class OAuthLogger {
         self::writeToFile("DEBUG: $msg");
     }
 }
-
-?>

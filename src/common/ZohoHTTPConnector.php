@@ -4,6 +4,7 @@ namespace ZCRM\common;
 
 use ZCRM\api\response\APIResponse;
 use ZCRM\common\APIConstants;
+use ZCRM\exception\ZCRMException;
 
 /**
  * Purpose of this class is to trigger API call and fetch the response
