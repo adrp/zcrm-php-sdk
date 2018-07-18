@@ -496,5 +496,3 @@ class ZCRMRecord {
   }
 
 }
-
-?>
