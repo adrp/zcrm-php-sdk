@@ -285,6 +285,47 @@ class MassEntityAPIHandler extends APIHandler {
     }
   }
 
+  public function getRecordsModifiedSince($cvId, $modifiedSince, $sortByField, $sortOrder, $page, $perPage) {
+    try {
+      $this->urlPath = $this->module->getAPIName();
+      $this->requestMethod = APIConstants::REQUEST_METHOD_GET;
+      $this->addHeader("Content-Type", "application/json");
+      if ($modifiedSince != NULL) {
+        $this->addHeader("If-Modified-Since", $modifiedSince);
+      }
+      if ($cvId != NULL) {
+        $this->addParam("cvid", $cvId);
+      }
+      if ($sortByField != NULL) {
+        $this->addParam("sort_by", $sortByField);
+      }
+      if ($sortOrder != NULL) {
+        $this->addParam("sort_order", $sortOrder);
+      }
+
+      $this->addParam("page", $page);
+      $this->addParam("per_page", $perPage);
+
+      $responseInstance = APIRequest::getInstance($this)->getBulkAPIResponse();
+      $responseJSON = $responseInstance->getResponseJSON();
+      $records = $responseJSON["data"];
+      $recordsList = [];
+      foreach ($records as $record) {
+        $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
+        EntityAPIHandler::getInstance($recordInstance)
+          ->setRecordProperties($record);
+        array_push($recordsList, $recordInstance);
+      }
+
+      $responseInstance->setData($recordsList);
+
+      return $responseInstance;
+    } catch (ZCRMException $exception) {
+      APIExceptionHandler::logException($exception);
+      throw $exception;
+    }
+  }
+
   public function searchRecords($searchWord, $page, $perPage, $type) {
     try {
       $this->urlPath = $this->module->getAPIName() . "/search";
