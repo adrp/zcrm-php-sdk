@@ -501,8 +501,8 @@ class ZCRMModule {
         return MassEntityAPIHandler::getInstance($this)->getRecordsModifiedSince($cvId, $modifiedSince, $sortByField, $sortOrder, $page, $perPage);
     }
 
-    public function searchRecords($searchWord, $page = 1, $perPage = 200) {
-        return MassEntityAPIHandler::getInstance($this)->searchRecords($searchWord, $page, $perPage);
+    public function searchRecords($searchWord, $page = 1, $perPage = 200, $type = 'word') {
+        return MassEntityAPIHandler::getInstance($this)->searchRecords($searchWord, $page, $perPage, $type);
     }
 
     public function massUpdateRecords($entityIds, $fieldApiName, $value) {

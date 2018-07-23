@@ -331,7 +331,6 @@ class MassEntityAPIHandler extends APIHandler {
       $this->urlPath = $this->module->getAPIName() . "/search";
       $this->requestMethod = APIConstants::REQUEST_METHOD_GET;
       $this->addHeader("Content-Type", "application/json");
-      $this->addParam("word", $searchWord);
       $this->addParam("page", $page);
       $this->addParam("per_page", $perPage);
 
