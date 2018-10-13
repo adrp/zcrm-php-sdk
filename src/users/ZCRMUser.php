@@ -568,6 +568,21 @@ class ZCRMUser {
     }
 
     /**
+     * Get full name with fallback to first and last name and then to user name.
+     * @return String
+     */
+    public function getFullNameWithFallback() {
+        if ($this->fullName) {
+          return $this->fullName;
+        }
+        $name = trim(implode(' ', array($this->getFirstName(), $this->getLastName())));
+        if ($name) {
+          return $name;
+        }
+        return $this->getName();
+    }
+
+    /**
      * fullName
      * @param String $fullName
      */
