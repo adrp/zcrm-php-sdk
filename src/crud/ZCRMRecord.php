@@ -54,6 +54,21 @@ class ZCRMRecord {
     return new ZCRMRecord($module, $entityId);
   }
 
+  public function __set($apiName, $value) {
+    $this->fieldNameVsValue[$apiName] = $value;
+  }
+
+  public function __get($apiName) {
+    if (isset($this->fieldNameVsValue[$apiName])) {
+      return $this->fieldNameVsValue[$apiName];
+    } 
+    return NULL;
+  }
+
+  public function __isset($apiName) {
+    return isset($this->fieldNameVsValue[$apiName]);
+  }
+
 
   public function addTax($taxIns) {
     array_push($this->taxList, $taxIns);
@@ -117,8 +132,46 @@ class ZCRMRecord {
     $this->fieldNameVsValue[$apiName] = $value;
   }
 
+  /**
+   * Method to check if the field value was set.
+   *
+   * @return String
+   */
+  public function issetFieldValue($apiName) {
+    return isset($this->fieldNameVsValue[$apiName]);
+  }
+
+  /**
+   * Method to check if the field value is empty
+   *
+   * @return String
+   */
+  public function isEmptyFieldValue($apiName) {
+    return empty($this->fieldNameVsValue[$apiName]);
+  }
+
   public function getData() {
     return $this->fieldNameVsValue;
+  }
+
+  /**
+   * Set's fields data.
+   *
+   * @param array
+   *   Fields' value array (indexed by field API name).
+   */
+  public function setData($data) {
+    $this->fieldNameVsValue = $data;
+  }
+
+  /**
+   * Merges fields data.
+   *
+   * @param array
+   *   Fields' value array (indexed by field API name).
+   */
+  public function mergeData($data) {
+    $this->fieldNameVsValue = merge_array($this->fieldNameVsValue, $data);
   }
 
   /**
