@@ -171,7 +171,7 @@ class ZCRMRecord {
    *   Fields' value array (indexed by field API name).
    */
   public function mergeData($data) {
-    $this->fieldNameVsValue = merge_array($this->fieldNameVsValue, $data);
+    $this->fieldNameVsValue = array_merge($this->fieldNameVsValue, $data);
   }
 
   /**
