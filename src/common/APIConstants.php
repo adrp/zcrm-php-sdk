@@ -26,6 +26,8 @@ class APIConstants {
 
   const INVALID_DATA = "INVALID_DATA";
 
+  const DUPLICATE_DATA = "DUPLICATE_DATA";
+
   const CODE_SUCCESS = "SUCCESS";
 
   const STATUS_SUCCESS = "success";
