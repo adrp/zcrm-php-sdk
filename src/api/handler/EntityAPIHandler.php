@@ -127,11 +127,12 @@ class EntityAPIHandler extends APIHandler {
   /**
    * @param $potentialRecord
    * @param $assignToUser
+   * @param $accountId
    *
    * @return array
    * @throws \ZCRM\exception\ZCRMException
    */
-  public function convertRecord($potentialRecord, $assignToUser) {
+  public function convertRecord($potentialRecord, $assignToUser, $accountId) {
     try {
       $this->requestMethod = APIConstants::REQUEST_METHOD_POST;
       $this->urlPath = $this->record->getModuleApiName() . "/" . $this->record->getEntityId() . "/actions/convert";
@@ -144,6 +145,9 @@ class EntityAPIHandler extends APIHandler {
       if ($potentialRecord != NULL) {
         $dataObject['Deals'] = self::getInstance($potentialRecord)
           ->getZCRMRecordAsJSON();
+      }
+      if ($accountId != NULL) {
+        $dataObject['Accounts'] = $accountId;
       }
       if (sizeof($dataObject) > 0) {
         $dataArray = json_encode([APIConstants::DATA => [array_filter($dataObject)]]);
