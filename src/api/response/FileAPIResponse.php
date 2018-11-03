@@ -4,6 +4,7 @@ namespace ZCRM\api\response;
 
 use ZCRM\common\APIConstants;
 use ZCRM\exception\ZCRMException;
+use ZCRM\exception\APIExceptionHandler;
 
 class FileAPIResponse {
     private $response = null;

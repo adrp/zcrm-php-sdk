@@ -4,8 +4,11 @@ namespace ZCRM\api\handler;
 
 use ZCRM\crud\ZCRMRecord;
 use ZCRM\crud\ZCRMTrashRecord;
-use  ZCRM\common\APIConstants;
+use ZCRM\common\APIConstants;
 use ZCRM\api\APIRequest;
+use ZCRM\exception\APIExceptionHandler;
+use ZCRM\exception\ZCRMException;
+
 
 class MassEntityAPIHandler extends APIHandler {
 
