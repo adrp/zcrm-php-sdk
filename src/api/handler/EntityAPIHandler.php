@@ -280,7 +280,7 @@ class EntityAPIHandler extends APIHandler {
     if (sizeof($this->record->getTaxList()) > 0) {
       $recordJSON["Tax"] = self::getTaxListAsJSON();
     }
-    return array_filter($recordJSON);
+    return $recordJSON;
   }
 
   /**
