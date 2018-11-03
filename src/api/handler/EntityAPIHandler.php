@@ -11,6 +11,7 @@ use ZCRM\api\APIRequest;
 use ZCRM\crud\ZCRMPriceBookPricing;
 use ZCRM\crud\ZCRMEventParticipant;
 use ZCRM\users\ZCRMUser;
+use ArrayObject as ArrayObject;
 
 
 class EntityAPIHandler extends APIHandler {
@@ -148,7 +149,7 @@ class EntityAPIHandler extends APIHandler {
         $dataArray = json_encode([APIConstants::DATA => [array_filter($dataObject)]]);
       }
       else {
-        $dataArray = json_encode([APIConstants::DATA => [new ArrayObject()]]);
+        $dataArray = json_encode([APIConstants::DATA => [new \ArrayObject()]]);
       }
       $this->requestBody = $dataArray;
 
