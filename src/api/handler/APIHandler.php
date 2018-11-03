@@ -119,4 +119,3 @@ class APIHandler implements APIHandlerInterface {
 
 }
 
-?>

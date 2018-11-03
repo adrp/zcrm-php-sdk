@@ -111,4 +111,3 @@ class BulkAPIResponse extends CommonAPIResponse {
 
 }
 
-?>

@@ -926,4 +926,3 @@ class EntityAPIHandlerTest
 	}
 	
 }
-?>

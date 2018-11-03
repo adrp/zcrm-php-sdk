@@ -537,5 +537,3 @@ class ZCRMModule {
         return MassEntityAPIHandler::getInstance($this)->getPermanentlyDeletedRecords();
     }
 }
-
-?>

@@ -49,4 +49,3 @@ class OldFileAPIResponse extends APIResponse {
     }
 }
 
-?>

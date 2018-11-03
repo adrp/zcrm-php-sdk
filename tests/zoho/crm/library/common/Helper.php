@@ -24,4 +24,3 @@ class Helper
 		fwrite($filePointer, self::TRTDOPEN.$slNo.self::TDCLOSEOPEN.$className.self::TDCLOSEOPEN.$methodName.self::TDCLOSEOPEN.$message.self::TDCLOSEOPEN.$exception.self::TDCLOSEOPEN.$status.self::TDCLOSEOPEN.round($timeTaken).self::TDTRCLOSE);
 	}
 }
-?>

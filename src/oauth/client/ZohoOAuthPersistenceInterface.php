@@ -10,4 +10,3 @@ interface ZohoOAuthPersistenceInterface {
     public function deleteOAuthTokens($userEmailId);
 }
 
-?>

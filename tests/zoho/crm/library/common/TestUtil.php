@@ -58,4 +58,3 @@ class TestUtil
 		return in_array($moduleName, array("Tasks","Calls","Events"));
 	}
 }
-?>

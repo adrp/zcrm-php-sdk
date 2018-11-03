@@ -427,4 +427,3 @@ class MassEntityAPIHandler extends APIHandler {
   }
 }
 
-?>

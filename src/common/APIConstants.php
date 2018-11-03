@@ -120,5 +120,3 @@ class APIConstants {
 
   const API_LIMIT_FOR_THE_DAY = "X-RATELIMIT-DAY-LIMIT";
 }
-
-?>
