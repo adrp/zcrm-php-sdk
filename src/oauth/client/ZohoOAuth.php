@@ -83,7 +83,38 @@ class ZohoOAuth {
 
     public static function getPersistenceHandlerInstance() {
         try {
-            return ZohoOAuth::getConfigValue("token_persistence_path") != "" ? new ZohoOAuthPersistenceByFile() : new ZohoOAuthPersistenceHandler();
+            if (empty(self::getConfigValue('persistence_handler_class'))) {
+              throw new \Exception("Ciritical: 'persistence_handler_class' OAuth config not set.");
+            }
+
+            $persistence_class = self::getConfigValue('persistence_handler_class');
+
+            // "Built in" classes get prefixed with namespace (so "new $class()" construction works.
+            // Custom classes have to be passed to configuration already with a namespace.
+            if (in_array($persistence_class, ['ZohoOAuthPersistenceByFile', 'ZohoOAuthPersistenceHandler'])) {
+              $persistence_namespaced_class = 'ZCRM\\oauth\\clientapp\\' . $persistence_class;
+            }
+            else {
+              $persistence_namespaced_class = $persistence_class;
+            }
+
+            if (!class_exists($persistence_namespaced_class)) {
+              throw new \Exception("Critical: '$persistence_namespaced_class' class not defined (set by 'persistence_handler_class' OAuth config).");
+            }
+
+            switch ($persistence_class) {
+              case 'ZohoOAuthPersistenceByFile': $required_config = ['token_persistence_path'];
+                   break;
+              case 'ZohoOAuthPersistenceHandler': $required_config = ['db_host', 'db_user', 'db_pass', 'db_name'];
+                   break;
+              default: $required_config = [];
+            }
+
+            if (!empty($missing_config = array_diff($required_config, array_keys(self::getAllConfigs())))) {
+              throw new \Exception("Critical: required configuration missing for '$persistence_class' persistence class: '" . implode("', '", $required_config));
+            }
+
+            return new $persistence_namespaced_class();
         } catch (Exception $ex) {
             throw new ZohoOAuthException($ex);
         }

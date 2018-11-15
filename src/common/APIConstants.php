@@ -106,6 +106,8 @@ class APIConstants {
 
   const ACTION = "action";
 
+  const CURRENT_USER_EMAIL = "currentUserEmail";
+
   const DUPLICATE_FIELD = "duplicate_field";
 
   const ACCESS_TOKEN_EXPIRY = "X-ACCESSTOKEN-RESET";

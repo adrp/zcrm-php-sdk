@@ -2,10 +2,11 @@
 
 namespace ZCRM\oauth\clientapp;
 
+use ZCRM\oauth\client\ZohoOAuth;
 use ZCRM\oauth\client\ZohoOAuthPersistenceInterface;
 use ZCRM\oauth\common\ZohoOAuthException;
 use ZCRM\oauth\common\OAuthLogger;
-
+use ZCRM\oauth\common\ZohoOAuthTokens;
 
 class ZohoOAuthPersistenceHandler implements ZohoOAuthPersistenceInterface {
 
@@ -19,19 +20,13 @@ class ZohoOAuthPersistenceHandler implements ZohoOAuthPersistenceInterface {
             $db_link = self::getMysqlConnection();
             $query = "INSERT INTO oauthtokens(useridentifier,accesstoken,refreshtoken,expirytime) VALUES('" . $zohoOAuthTokens->getUserEmailId() . "','" . $zohoOAuthTokens->getAccessToken() . "','" . $zohoOAuthTokens->getRefreshToken() . "'," . $zohoOAuthTokens->getExpiryTime() . ")";
 
-            /*$query="INSERT INTO oauthtokens(useridentifier,accesstoken,refreshtoken,expirytime) VALUES(?,?,?,?)";
-            $stmt=$db_link->prepare($query);
-            //ssi represents data types of param values (String,String,Integer)
-            $stmt->bind_param("sssi",$zohoOAuthTokens->getUserEmailId(),$zohoOAuthTokens->getAccessToken(),$zohoOAuthTokens->getRefreshToken(),$zohoOAuthTokens->getExpiryTime());
-            $stmt->execute();*/
             $result = mysqli_query($db_link, $query);
             if (!$result) {
                 OAuthLogger::severe("OAuth token insertion failed: (" . $db_link->errno . ") " . $db_link->error);
             }
 
         } catch (Exception $ex) {
-            Logger:
-            severe("Exception occured while inserting OAuthTokens into DB(file::ZohoOAuthPersistenceHandler)({$ex->getMessage()})\n{$ex}");
+            OAuthLogger::severe("Exception occured while inserting OAuthTokens into DB(file::ZohoOAuthPersistenceHandler)({$ex->getMessage()})\n{$ex}");
         } finally {
             if ($db_link != null) {
                 $db_link->close();
@@ -92,17 +87,15 @@ class ZohoOAuthPersistenceHandler implements ZohoOAuthPersistenceInterface {
     }
 
     public function getMysqlConnection() {
-        $mysqli_con = new mysqli("localhost:3306", "root", "", "zohooauth");
+        $db_host = ZohoOAuth::getConfigValue('db_host');
+        $db_user = ZohoOAuth::getConfigValue('db_user');
+        $db_name = ZohoOAuth::getConfigValue('db_name');
+        $db_pass = ZohoOAuth::getConfigValue('db_pass');
+        $mysqli_con = new \mysqli($db_host, $db_user, $db_pass, $db_name);
         if ($mysqli_con->connect_errno) {
             OAuthLogger::severe("Failed to connect to MySQL: (" . $mysqli_con->connect_errno . ") " . $mysqli_con->connect_error);
             echo "Failed to connect to MySQL: (" . $mysqli_con->connect_errno . ") " . $mysqli_con->connect_error;
         }
-        /*$db_link = mysql_connect('localhost:3307', 'root', '');
-        if (!$db_link) {
-            die('Could not connect: ' . mysql_error());
-        }
-        mysql_select_db('zohooauth', $db_link) or die('Could not select database.');
-        return $db_link;*/
 
         return $mysqli_con;
     }

@@ -2,8 +2,6 @@
 
 namespace ZCRM\api\handler;
 
-//require_once 'APIHandler.php';
-//require_once 'ModuleAPIHandler.php';
 use ZCRM\common\APIConstants;
 use ZCRM\common\ZohoHTTPConnector;
 use ZCRM\api\APIRequest;
@@ -14,6 +12,8 @@ use ZCRM\crud\ZCRMModuleRelatedList;
 use ZCRM\crud\ZCRMRelatedListProperties;
 use ZCRM\crud\ZCRMCustomView;
 use ZCRM\crud\ZCRMCustomViewCriteria;
+use ZCRM\api\handler\ModuleAPIHandler;
+use ZCRM\api\handler\APIHandler;
 
 class MetaDataAPIHandler extends APIHandler {
 
