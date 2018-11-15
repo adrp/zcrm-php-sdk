@@ -25,6 +25,7 @@ class ZCRMRestClient {
   public static function initialize($config) {
     ZCRMConfigUtil::initialize($config);
   }
+
   public static function parseConfig($config_path) {
     return ZCRMConfigUtil::parseConfig($config_path);
   }
@@ -32,7 +33,7 @@ class ZCRMRestClient {
   /**
    * @return mixed
    */
-  public function getAllModules() {
+  public static function getAllModules() {
     return MetaDataAPIHandler::getInstance()->getAllModules();
   }
 
@@ -41,14 +42,14 @@ class ZCRMRestClient {
    *
    * @return mixed
    */
-  public function getModule($moduleName) {
+  public static function getModule($moduleName) {
     return MetaDataAPIHandler::getInstance()->getModule($moduleName);
   }
 
   /**
    * @return ZCRMOrganization
    */
-  public function getOrganizationInstance() {
+  public static function getOrganizationInstance() {
     return ZCRMOrganization::getInstance();
   }
 
@@ -57,7 +58,7 @@ class ZCRMRestClient {
    *
    * @return ZCRMModule
    */
-  public function getModuleInstance($moduleAPIName) {
+  public static function getModuleInstance($moduleAPIName) {
     return ZCRMModule::getInstance($moduleAPIName);
   }
 
@@ -67,14 +68,14 @@ class ZCRMRestClient {
    *
    * @return ZCRMRecord
    */
-  public function getRecordInstance($moduleAPIName, $entityId) {
+  public static function getRecordInstance($moduleAPIName, $entityId) {
     return ZCRMRecord::getInstance($moduleAPIName, $entityId);
   }
 
   /**
    * @return mixed
    */
-  public function getCurrentUser() {
+  public static function getCurrentUser() {
     return OrganizationAPIHandler::getInstance()->getCurrentUser();
   }
 
@@ -93,4 +94,3 @@ class ZCRMRestClient {
     return OrganizationAPIHandler::getInstance()->getOrganizationDetails();
   }
 }
-
