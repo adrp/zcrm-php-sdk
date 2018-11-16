@@ -163,7 +163,6 @@ class ZohoOAuthClient {
     return $oAuthTokens;
   }
 
-
   /**
    * zohoOAuthParams
    *

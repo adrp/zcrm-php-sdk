@@ -2,42 +2,30 @@
 
 namespace ZCRM\oauth\common;
 
-use ZCRM\common\ZCRMConfigUtil;
+use ZCRM\common\LogHandler;
 
 class OAuthLogger {
-
-    public static function writeToFile($msg) {
-        set_include_path(ZCRMConfigUtil::getConfigValue('oAuthApplicationLogFilePath'));
-        $path = get_include_path();
-        if ($path{strlen($path) - 1} != '\/') {
-            $path = $path . "/";
-        }
-        $path = str_replace("\n", "", $path);
-        $filePointer = fopen($path . "OAuth.log", "a");
-        if (!$filePointer) {
-            return;
-        }
-        fwrite($filePointer, sprintf("%s %s\n", date("Y-m-d H:i:s"), $msg));
-        fclose($filePointer);
+    public static function log($msg, $severity) {
+        LogHandler::log($msg, $severity, 'oauth');
     }
 
     public static function warn($msg) {
-        self::writeToFile("WARNING: $msg");
+        self::log($msg, 'warning');
     }
 
     public static function info($msg) {
-        self::writeToFile("INFO: $msg");
+        self::log($msg, 'info');
     }
 
     public static function severe($msg) {
-        self::writeToFile("SEVERE: $msg");
+        self::log($msg, 'severe');
     }
 
     public static function err($msg) {
-        self::writeToFile("ERROR: $msg");
+        self::log($msg, 'error');
     }
 
     public static function debug($msg) {
-        self::writeToFile("DEBUG: $msg");
+        self::log($msg, 'debug');
     }
 }
