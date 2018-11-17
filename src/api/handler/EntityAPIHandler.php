@@ -52,7 +52,7 @@ class EntityAPIHandler extends APIHandler {
       $this->requestMethod = APIConstants::REQUEST_METHOD_POST;
       $this->urlPath = $this->record->getModuleApiName();
       $this->addHeader("Content-Type", "application/json");
-      $this->requestBody = json_encode(array_filter(["data" => [$inputJSON]]));
+      $this->requestBody = json_encode(["data" => [$inputJSON]]);
       $responseInstance = APIRequest::getInstance($this)->getAPIResponse();
       $responseDataArray = $responseInstance->getResponseJSON()['data'];
       $responseData = $responseDataArray[0];
@@ -81,7 +81,7 @@ class EntityAPIHandler extends APIHandler {
       $this->requestMethod = APIConstants::REQUEST_METHOD_PUT;
       $this->urlPath = $this->record->getModuleApiName() . "/" . $this->record->getEntityId();
       $this->addHeader("Content-Type", "application/json");
-      $this->requestBody = json_encode(array_filter(["data" => [$inputJSON]]));;
+      $this->requestBody = json_encode(["data" => [$inputJSON]]);
 
       $responseInstance = APIRequest::getInstance($this)->getAPIResponse();
 

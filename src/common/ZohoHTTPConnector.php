@@ -50,7 +50,7 @@ class ZohoHTTPConnector {
             curl_setopt($curl_pointer, CURLOPT_POSTFIELDS, $this->isBulkRequest ? json_encode(self::getRequestBody()) : self::getRequestBody());
         } else if ($this->requestType === APIConstants::REQUEST_METHOD_PUT) {
             curl_setopt($curl_pointer, CURLOPT_CUSTOMREQUEST, APIConstants::REQUEST_METHOD_PUT);
-            curl_setopt($curl_pointer, CURLOPT_POSTFIELDS, self::getRequestBody());
+            curl_setopt($curl_pointer, CURLOPT_POSTFIELDS, $this->isBulkRequest ? json_encode(self::getRequestBody()) : self::getRequestBody());
         } else if ($this->requestType === APIConstants::REQUEST_METHOD_DELETE) {
             curl_setopt($curl_pointer, CURLOPT_CUSTOMREQUEST, APIConstants::REQUEST_METHOD_DELETE);
         }
