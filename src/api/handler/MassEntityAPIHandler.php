@@ -217,10 +217,12 @@ class MassEntityAPIHandler extends APIHandler {
       $responseJSON = $responseInstance->getResponseJSON();
       $trashRecords = $responseJSON["data"];
       $trashRecordList = [];
-      foreach ($trashRecords as $trashRecord) {
-        $trashRecordInstance = ZCRMTrashRecord::getInstance($trashRecord['type'], $trashRecord['id']);
-        self::setTrashRecordProperties($trashRecordInstance, $trashRecord);
-        array_push($trashRecordList, $trashRecordInstance);
+      if (count($trashRecords)) {
+        foreach ($trashRecords as $trashRecord) {
+          $trashRecordInstance = ZCRMTrashRecord::getInstance($trashRecord['type'], $trashRecord['id']);
+          self::setTrashRecordProperties($trashRecordInstance, $trashRecord);
+          array_push($trashRecordList, $trashRecordInstance);
+        }
       }
 
       $responseInstance->setData($trashRecordList);
@@ -272,11 +274,13 @@ class MassEntityAPIHandler extends APIHandler {
       $responseJSON = $responseInstance->getResponseJSON();
       $records = $responseJSON["data"];
       $recordsList = [];
-      foreach ($records as $record) {
-        $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
-        EntityAPIHandler::getInstance($recordInstance)
-          ->setRecordProperties($record);
-        array_push($recordsList, $recordInstance);
+      if (count($records)) {
+        foreach ($records as $record) {
+          $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
+          EntityAPIHandler::getInstance($recordInstance)
+            ->setRecordProperties($record);
+          array_push($recordsList, $recordInstance);
+        }
       }
 
       $responseInstance->setData($recordsList);
@@ -313,11 +317,13 @@ class MassEntityAPIHandler extends APIHandler {
       $responseJSON = $responseInstance->getResponseJSON();
       $records = $responseJSON["data"];
       $recordsList = [];
-      foreach ($records as $record) {
-        $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
-        EntityAPIHandler::getInstance($recordInstance)
-          ->setRecordProperties($record);
-        array_push($recordsList, $recordInstance);
+      if (count($records)) {
+        foreach ($records as $record) {
+          $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
+          EntityAPIHandler::getInstance($recordInstance)
+            ->setRecordProperties($record);
+          array_push($recordsList, $recordInstance);
+        }
       }
 
       $responseInstance->setData($recordsList);
@@ -357,11 +363,13 @@ class MassEntityAPIHandler extends APIHandler {
       $responseJSON = $responseInstance->getResponseJSON();
       $records = $responseJSON["data"];
       $recordsList = [];
-      foreach ($records as $record) {
-        $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
-        EntityAPIHandler::getInstance($recordInstance)
-          ->setRecordProperties($record);
-        array_push($recordsList, $recordInstance);
+      if (count($records)) {
+        foreach ($records as $record) {
+          $recordInstance = ZCRMRecord::getInstance($this->module->getAPIName(), $record["id"]);
+          EntityAPIHandler::getInstance($recordInstance)
+            ->setRecordProperties($record);
+          array_push($recordsList, $recordInstance);
+        }
       }
 
       $responseInstance->setData($recordsList);
