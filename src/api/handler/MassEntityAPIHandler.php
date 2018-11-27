@@ -215,7 +215,7 @@ class MassEntityAPIHandler extends APIHandler {
 
       $responseInstance = APIRequest::getInstance($this)->getBulkAPIResponse();
       $responseJSON = $responseInstance->getResponseJSON();
-      $trashRecords = $responseJSON["data"];
+      $records = isset($responseJSON["data"]) ? $responseJSON["data"] : [];
       $trashRecordList = [];
       if (count($trashRecords)) {
         foreach ($trashRecords as $trashRecord) {
@@ -272,7 +272,7 @@ class MassEntityAPIHandler extends APIHandler {
 
       $responseInstance = APIRequest::getInstance($this)->getBulkAPIResponse();
       $responseJSON = $responseInstance->getResponseJSON();
-      $records = $responseJSON["data"];
+      $records = isset($responseJSON["data"]) ? $responseJSON["data"] : [];
       $recordsList = [];
       if (count($records)) {
         foreach ($records as $record) {
@@ -315,7 +315,7 @@ class MassEntityAPIHandler extends APIHandler {
 
       $responseInstance = APIRequest::getInstance($this)->getBulkAPIResponse();
       $responseJSON = $responseInstance->getResponseJSON();
-      $records = $responseJSON["data"];
+      $records = isset($responseJSON["data"]) ? $responseJSON["data"] : [];
       $recordsList = [];
       if (count($records)) {
         foreach ($records as $record) {
@@ -361,7 +361,7 @@ class MassEntityAPIHandler extends APIHandler {
 
       $responseInstance = APIRequest::getInstance($this)->getBulkAPIResponse();
       $responseJSON = $responseInstance->getResponseJSON();
-      $records = $responseJSON["data"];
+      $records = isset($responseJSON["data"]) ? $responseJSON["data"] : [];
       $recordsList = [];
       if (count($records)) {
         foreach ($records as $record) {
