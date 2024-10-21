@@ -3,12 +3,12 @@
 namespace ZCRM\exception;
 
 class ZCRMException extends \Exception {
-    protected $message = 'Unknown exception';     // Exception message
-    private $string;                            // Unknown
-    protected $code = 0;                           // User-defined exception code
-    protected $file;                              // Source filename of exception
-    protected $line;                              // Source line of exception
-    private $trace;
+    protected string $message = 'Unknown exception';     // Exception message
+    private string $string = "";                            // Unknown
+    protected int $code = 0;                           // User-defined exception code
+    protected string $file = "";                              // Source filename of exception
+    protected int $line;                              // Source line of exception
+    private array $trace = [];
     private $exceptionCode = "Unknown";
     private $exceptionDetails = array();
 
