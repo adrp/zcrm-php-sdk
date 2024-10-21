@@ -6,8 +6,8 @@ class ZohoOAuthException extends \Exception {
     protected $message = 'Unknown exception';     // Exception message
     private $string;                            // Unknown
     protected $code = 0;                           // User-defined exception code
-    protected $file;                              // Source filename of exception
-    protected $line;                              // Source line of exception
+    protected string $file;                              // Source filename of exception
+    protected int $line;                              // Source line of exception
     private $trace;
 
 
